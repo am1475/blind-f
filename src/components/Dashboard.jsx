@@ -1,3 +1,4 @@
+// client/src/components/Dashboard.jsx
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -20,32 +21,45 @@ function Dashboard() {
     );
   }
 
-  // Function to compute results and send POST request
   const handleSubmitResults = () => {
     // Guard against multiple submissions
     if (submitted) return;
     setSubmitted(true);
 
+    // Sanitize text: convert to lowercase and remove special characters (except spaces)
     const sanitize = (text) =>
       text
         .toLowerCase()
         .replace(/[^a-z0-9\s]/g, '')
         .trim();
-    
+
     const candidateWords = sanitize(candidateText).split(/\s+/);
     const challengeWords = sanitize(challengeText).split(/\s+/);
-    
-    let correct = 0;
-    for (let i = 0; i < challengeWords.length; i++) {
-      if (candidateWords[i] && candidateWords[i] === challengeWords[i]) {
-        correct++;
+
+    // Build frequency maps for the challenge and candidate texts
+    const challengeFreq = {};
+    challengeWords.forEach(word => {
+      challengeFreq[word] = (challengeFreq[word] || 0) + 1;
+    });
+    const candidateFreq = {};
+    candidateWords.forEach(word => {
+      candidateFreq[word] = (candidateFreq[word] || 0) + 1;
+    });
+
+    // Count the number of matched words (up to the frequency in the challenge text)
+    let matchedWords = 0;
+    for (const word in challengeFreq) {
+      if (candidateFreq[word]) {
+        matchedWords += Math.min(challengeFreq[word], candidateFreq[word]);
       }
     }
     
-    const computedAccuracy = (correct / challengeWords.length) * 100;
+    // Calculate accuracy as the ratio of matched words to total challenge words
+    const computedAccuracy = (matchedWords / challengeWords.length) * 100;
     setAccuracy(computedAccuracy.toFixed(2));
     
-    const computedTime = ((endTime - startTime) / 1000).toFixed(2); // in seconds
+    // Calculate the time taken in seconds
+    const computedTime = ((endTime - startTime) / 1000).toFixed(2);
     setTimeTaken(computedTime);
 
     const resultData = {
@@ -86,7 +100,6 @@ function Dashboard() {
             <p className="mb-4 text-xl text-gray-300">
               Time Taken: <span className="font-bold text-white">{timeTaken} seconds</span>
             </p>
-            {/* Admin Button added after displaying the test results */}
             <button
               onClick={() => navigate('/admin')}
               className="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-lg w-full"
@@ -98,7 +111,7 @@ function Dashboard() {
           <button
             onClick={handleSubmitResults}
             className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded w-full text-xl"
-            disabled={submitted}  // disable after submission
+            disabled={submitted}  // Disable after submission
           >
             Submit Results
           </button>
@@ -109,4 +122,5 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
 
