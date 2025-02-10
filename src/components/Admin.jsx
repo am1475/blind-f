@@ -37,12 +37,17 @@ function Admin() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
       {/* Challenge Text Form */}
-      <form onSubmit={handleChallengeSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-md mb-6">
-        <h2 className="text-2xl mb-4 font-semibold">Set Challenge Text</h2>
+      <form
+        onSubmit={handleChallengeSubmit}
+        className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md mb-8"
+      >
+        <h2 className="text-2xl mb-4 font-bold text-gray-800 text-center">
+          Set Challenge Text
+        </h2>
         <textarea
-          className="border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring"
+          className="border border-gray-300 p-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
           rows="5"
           value={challengeText}
           onChange={(e) => setChallengeText(e.target.value)}
@@ -51,18 +56,23 @@ function Admin() {
         />
         <button
           type="submit"
-          className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full"
+          className="mt-6 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded transition duration-300 w-full font-semibold"
         >
           Save Challenge
         </button>
       </form>
 
       {/* Candidate Name Form */}
-      <form onSubmit={handleNameSubmit} className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 className="text-2xl mb-4 font-semibold">Save Candidate Name</h2>
+      <form
+        onSubmit={handleNameSubmit}
+        className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md"
+      >
+        <h2 className="text-2xl mb-4 font-bold text-gray-800 text-center">
+          Save Candidate Name
+        </h2>
         <input
           type="text"
-          className="border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring"
+          className="border border-gray-300 p-3 w-full rounded focus:outline-none focus:ring-2 focus:ring-green-500"
           value={candidateName}
           onChange={(e) => setCandidateName(e.target.value)}
           placeholder="Enter candidate name..."
@@ -70,7 +80,7 @@ function Admin() {
         />
         <button
           type="submit"
-          className="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 w-full"
+          className="mt-6 bg-green-600 hover:bg-green-700 text-white px-5 py-3 rounded transition duration-300 w-full font-semibold"
         >
           Save Name
         </button>
@@ -79,7 +89,7 @@ function Admin() {
       {/* Home Button */}
       <button
         onClick={() => navigate('/')}
-        className="mt-6 bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800"
+        className="mt-8 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded transition duration-300 font-semibold"
       >
         Home
       </button>
@@ -88,3 +98,4 @@ function Admin() {
 }
 
 export default Admin;
+
