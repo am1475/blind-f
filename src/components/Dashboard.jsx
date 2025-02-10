@@ -86,6 +86,13 @@ function Dashboard() {
             <p className="mb-4 text-xl text-gray-300">
               Time Taken: <span className="font-bold text-white">{timeTaken} seconds</span>
             </p>
+            {/* Admin Button added after displaying the test results */}
+            <button
+              onClick={() => navigate('/admin')}
+              className="mt-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-lg w-full"
+            >
+              Admin
+            </button>
           </>
         ) : (
           <button
@@ -102,3 +109,4 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
