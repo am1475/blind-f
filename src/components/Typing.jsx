@@ -21,9 +21,19 @@ function Typing() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center bg-gray-900 overflow-hidden">
-      {/* Typewriter Effect Styles */}
+    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden patchy-bg">
+      {/* Combined styles for patchy background and typewriter effect */}
       <style>{`
+        .patchy-bg {
+          background: #0d1117;
+          background-image: 
+            linear-gradient(135deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+            linear-gradient(225deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+            linear-gradient(45deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%),
+            linear-gradient(315deg, rgba(255, 255, 255, 0.03) 25%, transparent 25%);
+          background-size: 40px 40px;
+          background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+        }
         .typewriter {
           overflow: hidden;              /* Hide the overflowing text */
           border-right: 0.15em solid #ffffff; /* The typewriter cursor */
@@ -79,7 +89,7 @@ function Typing() {
       </h1>
       
       {testStarted ? (
-        <div className="w-full max-w-2xl px-4">
+        <div className="w-full max-w-2xl px-4 mt-5">
           <textarea
             className="w-full h-40 p-4 bg-gray-800 text-white caret-white border border-gray-600 rounded focus:outline-none text-lg"
             placeholder="Type here..."
@@ -93,7 +103,7 @@ function Typing() {
           />
           <button
             onClick={handleSubmit}
-            className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 w-full text-lg"
+            className="mt-5 bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 w-full text-lg"
           >
             Submit Test
           </button>
